@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SPRING"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SPRING-DEPENDENCIES"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Spring jars"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Spring Jars Library"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Spring three"/>
+	<classpathentry kind="lib" path="C:/Users/Agape/Desktop/CS 3750/com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Agape/Desktop/CS 3750/com.springsource.org.aspectj.weaver-sources-1.6.8.RELEASE.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

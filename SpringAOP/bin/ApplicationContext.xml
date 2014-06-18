@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	  http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="AirportLocationDAO"
+		class="aop.dao.mock.AirportLocationDAOImpl" />
+	<bean id="DVDInfoDAO" class="aop.dao.mock.DVDInfoDAOImpl" />
+	<bean id="DVDLocationDAO" class="aop.dao.mock.DVDLocationDAOImpl" />
+	<bean id="LoanDAO" class="aop.dao.mock.LoanDAOImpl" />
+	<bean id="MemberDAO" class="aop.dao.mock.MemberDAOImpl" />
+
+
+	<bean id="KioskServiceTarget" class="aop.bo.KioskServiceImpl">
+		<constructor-arg>
+			<bean factory-bean="AirportLocationDAO"
+				factory-method="getLocationByID">
+				<constructor-arg>
+					<value>BUR-2</value>
+				</constructor-arg>
+			</bean>
+		</constructor-arg>
+		<property name="dvdInfoDAO" ref="DVDInfoDAO" />
+		<property name="dvdLocationDAO" ref="DVDLocationDAO" />
+		<property name="loanDAO" ref="LoanDAO" />
+		<property name="memberDAO" ref="MemberDAO" />
+	</bean>
+
+	<!-- Declare the MemberThrowsAdvice -->
+	<bean id="MemberThrowsAdvice"
+		class="aop.advices.MemberThrowsAdvice" />
+
+	<!-- Define the proxy that wraps the MemberDAO (BeanNameAutoProxyCreator) -->
+	<bean id="ThrowsProxy"
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames" value="MemberDAO" />
+		<property name="interceptorNames">
+			<list>
+				<value>MemberThrowsAdvice</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<!--Add the aop.bo.DVDStatistics component -->
+	<bean id="DVDStatistics" class="aop.bo.DVDStatistics"
+		factory-method="getInstance" />
+
+	<!-- Add aop.advices.SearchStatisticsAdvice and inject the DVDStatistics component, using setter injection -->
+	<bean id="SearchStatisticsAdvice"
+		class="aop.advices.SearchStatisticsAdvice">
+		<property name="dvdStatistics" ref="DVDStatistics" />
+	</bean>
+
+
+	<!-- Add an Advisor for SearchStatisticsAdvice and make sure this advice is only applied to all search methods of the KioskService -->
+	<bean id="DVDStatAdvisor"
+		class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice" ref="SearchStatisticsAdvice" />
+		<property name="pattern" value="aop.bo.KioskService.search.*" />
+	</bean>
+
+
+	<!-- Create the KioskService proxy and apply the DVDStatAdvisor to the KioskService -->
+	<bean id="KioskService"
+		class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces" value="aop.bo.KioskService" />
+		<property name="target" ref="KioskServiceTarget" />
+		<property name="interceptorNames">
+			<list>
+				<value>DVDStatAdvisor</value>
+			</list>
+		</property>
+	</bean>
+
+</beans>

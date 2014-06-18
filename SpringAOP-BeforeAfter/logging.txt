@@ -1,0 +1,51 @@
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Called: KioskServiceImpl.searchByTitle('2 Fast 2 Furious');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Returned: [DVDInfo{id=B00005JM4Z
+director=John Singleton
+encoding=Region-1
+format=Widescreen, Color, Widescreen, Dolby
+rated=PG-13 (Parental Guidance Suggested)
+studio=Universal Studios
+yearMonthRelease=200306
+title=2 Fast 2 Furious (Widescreen Edition)
+starring=Paul Walker - Tyrese - Cole Hauser
+locationID=BUR-2
+
+}]KioskServiceImpl.searchByTitle('2 Fast 2 Furious');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Called: KioskServiceImpl.loanDVD('B00005JM4Z','j.wirth','wrongPassword',Sun May 11 18:19:50 MDT 2014,'AMS-1');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Called: MemberDAOImpl.getMemberID('j.wirth','wrongPassword');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Exception aop.InvalidMemberPasswordException thrown by MemberDAOImpl.getMemberID('j.wirth','wrongPassword');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Returned: -1KioskServiceImpl.loanDVD('B00005JM4Z','j.wirth','wrongPassword',Sun May 11 18:19:50 MDT 2014,'AMS-1');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Called: KioskServiceImpl.searchByTitle('2 Fast 2 Furious');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Returned: [DVDInfo{id=B00005JM4Z
+director=John Singleton
+encoding=Region-1
+format=Widescreen, Color, Widescreen, Dolby
+rated=PG-13 (Parental Guidance Suggested)
+studio=Universal Studios
+yearMonthRelease=200306
+title=2 Fast 2 Furious (Widescreen Edition)
+starring=Paul Walker - Tyrese - Cole Hauser
+locationID=BUR-2
+
+}]KioskServiceImpl.searchByTitle('2 Fast 2 Furious');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Called: KioskServiceImpl.loanDVD('B00005JM4Z','j.wirth','wrongPassword',Thu May 15 14:48:48 MDT 2014,'AMS-1');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Called: MemberDAOImpl.getMemberID('j.wirth','wrongPassword');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Exception aop.InvalidMemberPasswordException thrown by MemberDAOImpl.getMemberID('j.wirth','wrongPassword');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Returned: -1KioskServiceImpl.loanDVD('B00005JM4Z','j.wirth','wrongPassword',Thu May 15 14:48:48 MDT 2014,'AMS-1');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Called: KioskServiceImpl.searchByTitle('2 Fast 2 Furious');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Returned: [DVDInfo{id=B00005JM4Z
+director=John Singleton
+encoding=Region-1
+format=Widescreen, Color, Widescreen, Dolby
+rated=PG-13 (Parental Guidance Suggested)
+studio=Universal Studios
+yearMonthRelease=200306
+title=2 Fast 2 Furious (Widescreen Edition)
+starring=Paul Walker - Tyrese - Cole Hauser
+locationID=BUR-2
+
+}]KioskServiceImpl.searchByTitle('2 Fast 2 Furious');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Called: KioskServiceImpl.loanDVD('B00005JM4Z','j.wirth','wrongPassword',Thu May 15 15:23:16 MDT 2014,'AMS-1');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Called: MemberDAOImpl.getMemberID('j.wirth','wrongPassword');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Exception aop.InvalidMemberPasswordException thrown by MemberDAOImpl.getMemberID('j.wirth','wrongPassword');
+DEBUG aop.advices.BeforeAfterLoggingAdvice - Returned: -1KioskServiceImpl.loanDVD('B00005JM4Z','j.wirth','wrongPassword',Thu May 15 15:23:16 MDT 2014,'AMS-1');

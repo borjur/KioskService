@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xsi:schemaLocation="
+          http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+          http://www.springframework.org/schema/aop     http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+  <!--Add the aop:aspectj autoproxy creator -->
+  <aop:aspectj-autoproxy/>
+
+
+  <bean id="AirportLocationDAO" class="aop.dao.mock.AirportLocationDAOImpl"/>
+  <bean id="DVDInfoDAO" class="aop.dao.mock.DVDInfoDAOImpl"/>
+  <bean id="DVDLocationDAO" class="aop.dao.mock.DVDLocationDAOImpl"/>
+  <bean id="LoanDAO" class="aop.dao.mock.LoanDAOImpl"/>
+  <bean id="MemberDAO" class="aop.dao.mock.MemberDAOImpl"/>
+
+
+  <bean id="KioskService" class="aop.bo.KioskServiceImpl">
+      <constructor-arg>
+         <bean factory-bean="AirportLocationDAO" factory-method="getLocationByID">
+             <constructor-arg>
+                  <value>BUR-2</value>
+             </constructor-arg>
+         </bean>
+      </constructor-arg>
+      <property name="dvdInfoDAO" ref="DVDInfoDAO"/>
+      <property name="dvdLocationDAO" ref="DVDLocationDAO"/>
+      <property name="loanDAO" ref="LoanDAO"/>
+      <property name="memberDAO" ref="MemberDAO"/>
+  </bean>
+  
+  <!-- Add aop.advices.MemberThrowsAdvice. There is nothing to inject into it. -->
+	<bean id="MemberThrowsAdvice" class="aop.advices.MemberThrowsAdvice" />
+	
+  <!-- Add the aop.bo.DVDStatistics component -->
+  <bean id="dvdStats" class="aop.bo.DVDStatistics" factory-method="getInstance" />
+
+  <!-- Add aop.advices.SearchStatisticsAdvice and inject the DVDStatistics component, using setter injection -->
+  <bean id="SearchStatsAdvice" class="aop.advices.SearchStatisticsAdvice">
+  	<property name="dvdStats" ref="dvdStats" />
+  </bean>
+  
+</beans>

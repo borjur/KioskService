@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+ 
+  <!-- 
+    Define the five (mocked) DAO implementation classes
+    all these classes reside in the config.dao.mock package
+  -->
+	<bean id="airportLocationDaoBean" class="config.dao.mock.AirportLocationDAOImpl" />
+	<bean id="dvdInfoDaoBean" class="config.dao.mock.DVDInfoDAOImpl" />
+	<bean id="dvdLocationDaoBean" class="config.dao.mock.DVDLocationDAOImpl" />
+	<bean id="loanDaoBean" class="config.dao.mock.LoanDAOImpl" />
+	<bean id="memberDaoBean" class="config.dao.mock.MemberDAOImpl" />
+    
+
+
+  <!-- 
+    Complete the KioskService definition.
+    The KioskService requires a single parameter in the constructor of
+    type AirportLocation which can be obtained by invoking
+    the (non-static) getLocationByID method on the AirportLocationDAO
+
+    In addition, the KioskService contains four properties that must be set
+    dvdInfoDAO, dvdLocationDAO,loanDAO and memberDAO
+  -->
+  <bean name="KioskService" class="config.bo.KioskService">
+  
+	<constructor-arg>
+	     <!--  //called a constructor parameter from AirportLocationDAOImpl method getLocationByID(String id)-->
+		<bean factory-bean="airportLocationDaoBean" factory-method="getLocationByID">
+			<constructor-arg value="BUR-2" />
+		</bean>
+		
+	</constructor-arg>
+	
+	<!-- name comes from setDvdInfoDAO in the kiosk class but you erase set  -->
+	<property name="dvdInfoDAO" ref="dvdInfoDaoBean" />
+	<property name="dvdLocationDAO" ref="dvdLocationDaoBean" />
+	<property name="loanDAO" ref="loanDaoBean" />
+	<property name="memberDAO" ref="memberDaoBean" />
+  </bean>
+  
+</beans>

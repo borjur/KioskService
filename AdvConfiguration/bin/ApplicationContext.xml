@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+ 
+  <bean id="AirportLocationDAO" class="advanced.dao.mock.AirportLocationDAOImpl"/>
+  <bean id="DVDInfoDAO" class="advanced.dao.mock.DVDInfoDAOImpl"/>
+  <bean id="DVDLocationDAO" class="advanced.dao.mock.DVDLocationDAOImpl"/>
+  <bean id="LoanDAO" class="advanced.dao.mock.LoanDAOImpl"/>
+  <bean id="MemberDAO" class="advanced.dao.mock.MemberDAOImpl"/>
+
+
+  <!-- Remove the constructor argument from the KioskService, this will
+       become the template for all KioskServices
+    -->
+  <bean name="KioskServiceTemplate" class="advanced.bo.KioskService" 
+  
+   abstract="true">
+      <property name="dvdInfoDAO" ref="DVDInfoDAO" />
+      <property name="dvdLocationDAO" ref="DVDLocationDAO" />
+      <property name="loanDAO" ref="LoanDAO" />
+      <property name="memberDAO" ref="MemberDAO" />
+  </bean>
+
+
+
+  <!-- Define a new Bean called 'KioskServiceUSA' which is a child definition of the KioskServiceTemplate bean
+      make sure you add the constructor parameter.
+      When specifying the value, make a reference to an entry in a properties file called 'location.id.usa'-->
+	<bean id="KioskServiceUSA" parent="KioskServiceTemplate">
+		<constructor-arg>
+			<bean factory-bean="AirportLocationDAO" factory-method="getLocationByID">
+				<constructor-arg value="${location.id.usa}" />
+			</bean>
+		</constructor-arg>
+	</bean>
+
+
+<!-- da nebi ponavljali all these property name="dvdInfoDAO and others in 
+
+KioskServiceUSA and KioskServiceNL thats why you have KioskServiceTemplate abstract --> 
+
+
+    <!-- Define a new Bean called 'KioskServiceNL' which is a child definition of the KioskServiceTemplate bean
+  make sure you add the constructor parameter.
+  When specifying the value, make a reference to an entry in a properties file called 'location.id.nl'-->
+  
+  
+  
+	<bean id="KioskServiceNL" parent="KioskServiceTemplate">
+		<constructor-arg>
+			<bean factory-bean="AirportLocationDAO" factory-method="getLocationByID">
+				<constructor-arg value="${location.id.nl}" />
+			</bean>
+		</constructor-arg>
+	</bean>
+
+
+  <!-- Declare the 'PropertyConfigurer' (org.springframework.beans.factory.config.PropertyPlaceholderConfigurer)
+    and define the location of the properties files as 'advanced/KioskServices.properties'-->
+	<bean id="PropertyConfigurer" 
+			class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="advanced/KioskServices.properties" />
+	</bean>
+
+</beans>
