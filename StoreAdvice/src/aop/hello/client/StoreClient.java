@@ -11,7 +11,7 @@ public class StoreClient {
 		String springConfig = "aop/spring-config.xml";
 		ApplicationContext spring = new
 			ClassPathXmlApplicationContext(springConfig);
-		
+		//ice cream
 		String item = "ice cream";
 		Store store = spring.getBean("store", Store.class);
 		store.purchaseItem(item);
